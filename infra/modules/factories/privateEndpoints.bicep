@@ -17,6 +17,7 @@ param resource_id string
 @allowed([
   'blob'
   'sqlServer'
+  'vault'
 ])
 param tipo_de_recurso string
 

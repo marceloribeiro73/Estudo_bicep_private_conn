@@ -1,4 +1,5 @@
 param env_id string
+param object_id_adm string
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   name: 'akv-br-${env_id}-teste'
@@ -16,7 +17,21 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
       bypass: 'AzureServices'
     }
     tenantId: tenant().tenantId
+    accessPolicies:[
+      {
+        tenantId: tenant().tenantId
+        objectId: object_id_adm
+        permissions: {
+          keys:[
+            'list'
+          ]
+          secrets: [
+            'list'
+          ]
+        }
+      }
+    ]
   }
 }
 
-output out_str_keyVault_id string = keyVault.id
+output out_str_keyVault_name string = keyVault.name

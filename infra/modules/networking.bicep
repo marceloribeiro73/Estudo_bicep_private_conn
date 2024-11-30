@@ -42,6 +42,11 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-03-01' = {
           networkSecurityGroup: {
             id: nsg.id
           }
+          serviceEndpoints: [
+            {
+              service: 'Microsoft.Vault'
+            }
+          ]
         }
       }
     ]
@@ -58,6 +63,11 @@ resource subnetStorage 'Microsoft.Network/virtualNetworks/subnets@2024-03-01' ex
   name: 'subnet-br-${env_id}-teste-storage'
 }
 
+resource subnetVault 'Microsoft.Network/virtualNetworks/subnets@2024-03-01' existing = {
+  parent: vnet
+  name: 'subnet-br-${env_id}-teste-vault'
+}
+
 resource nsg 'Microsoft.Network/networkSecurityGroups@2024-03-01' = {
   name: 'nsg-br-${env_id}-teste'
   location: location
@@ -71,3 +81,4 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2024-03-01' = {
 
 output out_str_vnet_id string = vnet.id
 output out_str_vnet_subnetStorage_id string = subnetStorage.id
+output out_str_vnet_subnetVault_id string = subnetVault.id
