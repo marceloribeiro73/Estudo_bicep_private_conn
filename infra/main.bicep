@@ -22,7 +22,7 @@ module storage 'modules/storage.bicep' = {
   name: 'storage-deployment'
   params: {
     env_id: param_env_id
-    vnet_id: networking.outputs.out_str_vnet_subnet1_id
+    vnet_id: networking.outputs.out_str_vnet_subnetStorage_id
   }
 }
 
@@ -32,5 +32,16 @@ module datafactory 'modules/datafactory.bicep' = {
   params:{
     env_id: param_env_id
     storage_account_id: storage.outputs.out_str_storage_id
+  }
+}
+
+module privateNetworking 'modules/privateEndPoints.bicep' = {
+  scope: rgTeste
+  name: 'privateNetworking-deployment'
+  params: {
+    env_id: param_env_id
+    storage_account_id: storage.outputs.out_str_storage_id
+    subnet_storage_id: networking.outputs.out_str_vnet_subnetStorage_id
+    vnet_id: networking.outputs.out_str_vnet_id
   }
 }
