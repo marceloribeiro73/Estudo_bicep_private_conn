@@ -30,12 +30,23 @@ resource storageaccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
 resource storageAccountBlob 'Microsoft.Storage/storageAccounts/blobServices@2023-05-01' = {
   parent: storageaccount
   name: 'default'
+  properties: {
+    containerDeleteRetentionPolicy: {
+      enabled: true
+      days: 7
+    }
+  }
 }
 
 resource storageContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-05-01' = {
   parent: storageAccountBlob
   name: 'raw-data'
+  properties: {
+    publicAccess: 'None'
+  }
 }
 
 
+
 output out_str_storage_id string = storageaccount.id
+output out_str_storage_name string = storageaccount.name
