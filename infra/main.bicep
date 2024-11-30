@@ -43,6 +43,7 @@ module privateNetworking 'modules/privateEndPoints.bicep' = {
     storage_account_id: storage.outputs.out_str_storage_id
     subnet_storage_id: networking.outputs.out_str_vnet_subnetStorage_id
     vnet_id: networking.outputs.out_str_vnet_id
+    storage_account_name: storage.outputs.out_str_storage_name
   }
 }
 //Keyvault

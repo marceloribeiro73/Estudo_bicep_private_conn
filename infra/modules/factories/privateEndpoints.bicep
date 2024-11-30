@@ -26,10 +26,10 @@ param vnet_id string
 @description('Nome da zona de dns privada:')
 param private_DNS_zone_name string 
 
-@description('Nome do projeto: (Sera usado para criar o nome do endpoint)')
-param nome_do_projeto string
+@description('Nome do recurso: (Sera usado para criar o nome do endpoint, por exemplo, strteste (storage do projeto teste))')
+param nome_do_recurso string
 
-var privateEndPointName = 'pe-br-${env_id}-${nome_do_projeto}'
+var privateEndPointName = 'pe-br-${env_id}-${nome_do_recurso}'
 
 resource privateDNSZone 'Microsoft.Network/privateDnsZones@2024-06-01' = {
   name: private_DNS_zone_name

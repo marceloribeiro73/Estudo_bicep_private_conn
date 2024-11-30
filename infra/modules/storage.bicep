@@ -49,3 +49,4 @@ resource storageContainer 'Microsoft.Storage/storageAccounts/blobServices/contai
 
 
 output out_str_storage_id string = storageaccount.id
+output out_str_storage_name string = storageaccount.name
