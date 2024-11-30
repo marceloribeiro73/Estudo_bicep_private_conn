@@ -49,6 +49,20 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-03-01' = {
           ]
         }
       }
+      {
+        name: 'subnet-br-${env_id}-teste-dbs'
+        properties: {
+          addressPrefix: '10.0.1.32/28'
+          networkSecurityGroup: {
+            id: nsg.id
+          }
+          serviceEndpoints: [
+            {
+              service: 'Microsoft.postgresqlServer'
+            }
+          ]
+        }
+      }
     ]
   }
 }
@@ -68,6 +82,11 @@ resource subnetVault 'Microsoft.Network/virtualNetworks/subnets@2024-03-01' exis
   name: 'subnet-br-${env_id}-teste-vault'
 }
 
+resource subnetDbs 'Microsoft.Network/virtualNetworks/subnets@2024-03-01' existing = {
+  parent: vnet
+  name: 'subnet-br-${env_id}-teste-dbs'
+}
+
 resource nsg 'Microsoft.Network/networkSecurityGroups@2024-03-01' = {
   name: 'nsg-br-${env_id}-teste'
   location: location
@@ -82,3 +101,4 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2024-03-01' = {
 output out_str_vnet_id string = vnet.id
 output out_str_vnet_subnetStorage_id string = subnetStorage.id
 output out_str_vnet_subnetVault_id string = subnetVault.id
+output out_str_vnet_subnetDbs_id string = subnetDbs.id
