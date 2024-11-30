@@ -44,7 +44,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-03-01' = {
           }
           serviceEndpoints: [
             {
-              service: 'Microsoft.Vault'
+              service: 'Microsoft.KeyVault'
             }
           ]
         }

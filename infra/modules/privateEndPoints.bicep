@@ -28,7 +28,7 @@ module privateEndpointVault 'factories/privateEndpoints.bicep' ={
   name: 'privateEndpointkeyVault'
   params: {
     env_id: env_id
-    private_DNS_zone_name: 'privatelink.${environment().suffixes.keyvaultDns}'
+    private_DNS_zone_name: 'privatelink${environment().suffixes.keyvaultDns}'
     resource_id: resourceId('Microsoft.KeyVault/vaults',vault_name)
     subnet_id: subnet_vault_id
     tipo_de_recurso: 'vault'
