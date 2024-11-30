@@ -45,7 +45,7 @@ module privateNetworking 'modules/privateEndPoints.bicep' = {
     vnet_id: networking.outputs.out_str_vnet_id
   }
 }
-
+//Keyvault
 module keyVault 'modules/keyvault.bicep' = {
   scope: rgTeste
   name: 'keyVault-deployment'
